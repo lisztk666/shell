@@ -1,0 +1,8 @@
+*.tmp
+*.TMP
+~*.*
+Thumbs.db
+lost+found
+/#recycle/
+/.recycle/
+/#snapshot/

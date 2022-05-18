@@ -1,0 +1,16 @@
+backup
+BackUp
+Backup
+htools
+INBOX
+wbackup
+"DLL-1"
+down
+*.tmp
+*.TMP
+~$*.*
+Thumbs.db
+lost+found
+/.recycle/
+/#recycle/
+/#snapshot/
