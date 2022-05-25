@@ -1,8 +1,11 @@
 #!/bin/bash
-#1110508修改
+#1110525修改
+# 請先建立 /etc/sh/list/wnbaklist 檔案 ,並在裡面填入絕對路徑 /sysvol/hs/whan
+
 PATH=$PATH
 
 #set name
+MSG="NAME_to_7z"
 
 LOG="/backup/log/`date +%Y%m%d`-data.log"
 GLOG="/backup/mis/log/`date +%Y%m%d`-data_good.log"
@@ -10,85 +13,74 @@ BLOG="/backup/mis/log/`date +%Y%m%d`-data_error.log"
 LOGDAY="`date +%Y%m%d`"
 DATEFMT="`date +%Y%m%d"|"%H:%M:%S`"
 
-MSG="hs_to_7z"
-
-SOURCEWHAN="/zsysvol/sysvol/hs/Whan"
-SOURCEWMC="/zsysvol/sysvol/hs/W3000/Wmc/Data"
-SOURCEWCOMM="/zsysvol/sysvol/hs/W3000/comm"
+#SOURCEWHAN="/zsysvol/sysvol/hs/Whan"
+#SOURCEWMC="/zsysvol/sysvol/hs/W3000/Wmc/Data"
+#SOURCEWCOMM="/zsysvol/sysvol/hs/W3000/comm"
 SOURCEWDATA="/zsysvol/sysvol/hs/W3000/data/"
-
-SOURCETXT="/etc/sh/bak.list"
 
 DIRECTORYBAK="/backup/bak/"
 DIRECTORYBAKDAY="/backup/bak/hs/`date +%Y%m%d`"
 DIRECTORYBAKDAYW3="/backup/bak/hs/`date +%Y%m%d`/w3000/`date +%Y%m%d`"
 
 #check dir and mkdir dir
-#error  ls -D "$DIRECTORYBAKDAY"||mkdir -p "$DIRECTORYBAKDAYW3"
 ls -D "$DIRECTORYBAKDAY"||mkdir -p  "$DIRECTORYBAKDAY/w3000"
 #CHECK_FILES=""
-
 CHECK_DIR="/backup/bak/hs/`date +%Y%m%d`/checkdir"
 
-#7z whan
-echo 7z whan
-du -sh "$SOURCEWHAN" >>"$LOG"
-du -sh "$SOURCEWHAN"
-#echo "7z whan start....... "$DATEFMT"" >>"$LOG"
-#echo "7z whan start....... "$DATEFMT""
-echo "7z whan start....... `date`" >>"$LOG"
-echo "7z whan start....... `date`"
-echo "$DIRECTORYBAKDAY"/"$LOGDAY".whan.7z
-nice -n -20 7za a -mx9 "$DIRECTORYBAKDAY"/"$LOGDAY".whan.7z   "$SOURCEWHAN" 1>>"$GLOG" 2>>"$BLOG"
-du -sh "$DIRECTORYBAKDAY".whan.7z >>"$LOG"
-#echo "7z whan end....... "$DATEFMT"" >>"$LOG"
-#echo "7z whan end....... "$DATEFMT""
-echo "7z whan end....... `date`" >>"$LOG"
-echo "7z whan end....... `date`"
-ls -alh "$DIRECTORYBAKDAY"/"$LOGDAY".whan.7z >>"$LOG"
-ls -alh "$DIRECTORYBAKDAY"/"$LOGDAY".whan.7z
-echo  >>"$LOG"
-echo
+#-------------- wnbaklist 循環開始
+BAKFLIST="/etc/sh/list/wnbaklist"
+#檢查備分list
+if [ ! -f $BAKFLIST ];then
+    echo not such "$BAKLIST" error 
+    echo not such "$BAKLIST" error >>"$LOG"
+    sleep 3s
+    continue
+fi
 
-#7z comm
-echo 7z comm
-du -sh "$SOURCEWCOMM" >>"$LOG"
-du -sh "$SOURCEWCOMM"
-#echo "7z comm start....... "$DATEFMT""
-#echo "7z comm start....... "$DATEFMT"" >>"$LOG"
-echo "7z comm start....... `date`"
-echo "7z comm start....... `date`" >>"$LOG"
-nice -n -20 7za a -mx9 "$DIRECTORYBAKDAY"/"$LOGDAY".wcomm.7z   "$SOURCEWCOMM" 1>>"$GLOG" 2>>"$BLOG"
-du -sh "$DIRECTORYBAKDAY"/"$LOGDAY".wcomm.7z >>"$LOG"
-#echo "7z comm end....... "$DATEFMT"" >>"$LOG"
-#echo "7z comm end....... "$DATEFMT""
-echo "7z comm end....... `date`" >>"$LOG"
-echo "7z comm end....... `date`"
-ls -alh "$DIRECTORYBAKDAY"/"$LOGDAY".wcomm.7z >>"$LOG"
-ls -alh "$DIRECTORYBAKDAY"/"$LOGDAY".wcomm.7z
-echo  >>"$LOG"
-echo
+BAKLIST=$(cat /etc/sh/list/wnbaklist)  
+echo "================`hostname`==================">>"$LOG"
+#檢查備分路徑
+for c in $BAKLIST ;do
+    if [ ! -d $c ];then
+      echo  "${c###*/}"
+      echo "not such Directory $c " 
+      echo "not such Directory $c " >>"$LOG" 
+      sleep 3s
+      continue
+    fi
 
-#7z wmc
-echo 7z wmc
-du -sh "$SOURCEWMC" >>"$LOG"
-du -sh "$SOURCEWMC"
-#echo "7z wmc start....... "$DATEFMT""
-#echo "7z wmc start....... "$DATEFMT"" >>"$LOG"
-echo "7z wmc start....... `date`"
-echo "7z wmc start....... `date`" >>"$LOG"
-nice -n -20 7za a -mx9 "$DIRECTORYBAKDAY"/"$LOGDAY".wmc.7z   "$SOURCEWMC" 1>>"$GLOG" 2>>"$BLOG"
-du -sh "$DIRECTORYBAKDAY"/"$LOGDAY".wmc.7z >>"$LOG"
-#echo "7z wmc end....... "$DATEFMT"" >>"$LOG"
-#echo "7z wmc end....... "$DATEFMT""
-echo "7z wmc end....... `date`" >>"$LOG"
-echo "7z wmc end....... `date`"
-ls -alh "$DIRECTORYBAKDAY"/"$LOGDAY".wmc.7z >>"$LOG"
-ls -alh "$DIRECTORYBAKDAY"/"$LOGDAY".wmc.7z
-echo  >>"$LOG"
-echo
+	#7z ${c##*/}
+	echo 7z ${c##*/}
+	du -sh "$c" >>"$LOG"
+	du -sh "$c"
+	#echo "7z ${c##*/} start....... "$DATEFMT"" >>"$LOG"
+	#echo "7z ${c##*/} start....... "$DATEFMT""
+	echo "7z ${c##*/} start....... `date`" >>"$LOG"
+	echo "7z ${c##*/} start....... `date`"
+	echo "$DIRECTORYBAKDAY"/"$LOGDAY".${c##*/}.7z
+    echo nice -n -20 7za a -mx9 "$DIRECTORYBAKDAY"/"$LOGDAY".${c##*/}.7z "$c" 1>>"$GLOG" 2>>"$BLOG"
+    nice -n -20 7za a -mx9 "$DIRECTORYBAKDAY"/"$LOGDAY".${c##*/}.7z "$c" 1>>"$GLOG" 2>>"$BLOG"
+	du -sh "$DIRECTORYBAKDAY".${c##*/}.7z >>"$LOG"
+	#echo "7z ${c##*/} end....... "$DATEFMT"" >>"$LOG"
+	#echo "7z ${c##*/} end....... "$DATEFMT""
+	echo "7z ${c##*/} end....... `date`" >>"$LOG"
+	echo "7z ${c##*/} end....... `date`"
+	ls -alh "$DIRECTORYBAKDAY"/"$LOGDAY".${c##*/}.7z >>"$LOG"
+	ls -alh "$DIRECTORYBAKDAY"/"$LOGDAY".${c##*/}.7z
+	echo  >>"$LOG"
+	echo
+done
 
+#-------------- wnbaklist 循環開始
+sleep 3s
 #7z w3000data
+if [ ! -D "$SOURCEWDATA" ];then
+    echo "not "$SOURCEWDATA" such Directory $c " 
+    echo "not "$SOURCEWDATA" such Directory $c " >>"$LOG" 
+    unix2dos "$LOG"
+    exit 1
+fi
+
 ls "$SOURCEWDATA" -D >"$CHECK_DIR"
 #sleep 30
 #cat "$CHECK_DIR"
@@ -104,6 +96,7 @@ for X in  `cat $CHECK_DIR` ;do
     nice -n -20 7za a -mx9 "$DIRECTORYBAKDAYW3"-"$X".7z "$SOURCEWDATA""$X"
     #clear
 done
+
 echo
 echo "壓縮後共" `ls $DIRECTORYBAKDAYW3|grep ".7z"|wc -l` "檔案"
 echo "壓縮後共" `ls $DIRECTORYBAKDAYW3|grep ".7z"|wc -l` "檔案">>"$LOG"
@@ -115,3 +108,4 @@ echo "7z w3000 end  ....... `date`"
 echo "7z w3000 end  ....... `date`" >>"$LOG"
 echo  >>"$LOG"
 unix2dos "$LOG"
+
