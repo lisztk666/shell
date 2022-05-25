@@ -14,9 +14,9 @@ DATEFMT="%Y/%m/%d-%R"
 DATFEMT_WEEK="week_`date +%u`"
 
 #名稱
-CMSG="和榮_PVE_smb_week_`date +%u`"
-EMSG="herong_PVE_Backup_week_`date +%u`"
-AMSG="和榮_herong_Backup_week_`date +%u`"
+CMSG="名字_PVE_smb_week_`date +%u`"
+EMSG="NAME_PVE_Backup_week_`date +%u`"
+AMSG="名字_NAME_Backup_week_`date +%u`"
 
 #開始掛載
 #/etc/sh/umount.sh 1>>$HGLOG 
