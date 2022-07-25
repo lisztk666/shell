@@ -11,10 +11,10 @@ DAY=1
 HOURS=8h
 SEC=5s
 
-# 1 正常,0 不正常
+#正常0 ,不正常1
 KEYOK=0
 
-#虛擬機開機準備
+#虛擬機開機準備,休息300s
 sleep 300s
 echo -e "預設 KEYOK=$KEYOK 正常\n"
 while true
@@ -28,11 +28,12 @@ do
    sleep 3s
    NOWTIME=$(date +'%Y%m%d-%H:%M:%S')
    GOODMSG=("$HOSTNAME主機_$PINGHOST-於$NOWTIME-恢復正常")
-   ping $PINGHOST -c 1 >>/dev/null && echo "2 ok" || $TERRORMSG $GOODMSG
+   #ping $PINGHOST -c 1 >>/dev/null && echo "2 ok" || $TERRORMSG $GOODMSG
    ping $PINGHOST -c 1 >>/dev/null && KEYOK=0 || KEYOK=1
    if [ $KEYOK == 0 ]
     then
      echo "logout 2 "
+     $TERRORMSG $GOODMSG
      break
     fi
   done
