@@ -44,14 +44,13 @@ do
     echo "qm call start"
     echo $QM_ON
     #啟動次數+1
-    $[QM_TIME++] 
+    (( QM_TIME++ ))
     $QM_ON
     sleep 90s
    else
-	 $TERRORMSG "$VM_跳過"
+   #$TERRORMSG "$VM_跳過"
    echo "qm continue"
-   QM_TIME=0
-    continue
+   #QM_TIME=0
    fi
 
    ping $PINGHOST -c 1 >>/dev/null && KEYOK=0 || KEYOK=1
@@ -60,7 +59,7 @@ do
     then
      echo "logout 2 "
      echo "確認上線脫離2次迴圈 "
-	 $TERRORMSG $GOODMSG
+     $TERRORMSG $GOODMSG
      break
     fi
   done
