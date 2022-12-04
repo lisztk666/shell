@@ -487,8 +487,7 @@ exit 0
 EOF
 
 chmod +x /etc/rc.local
-systemctl enable rc-local
-systemctl start  re-local
+systemctl enable rc-local --now
 
 #修改apcupsd
 cp -a /etc/apcupsd/apcupsd.conf /etc/apcupsd/apcupsd.conf.default
