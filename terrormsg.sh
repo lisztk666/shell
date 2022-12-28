@@ -1,5 +1,5 @@
 #!/bin/bash
-# 1110513用法 ./tsendmsg text
+# 1110513用法 ./terrormsg text
 if [ -z "$1" ]; then
   echo No argument given
   exit
