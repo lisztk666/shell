@@ -14,6 +14,7 @@ DATEFMT="%Y/%m/%d-%R"
 DATFEMT_WEEK="week_`date +%u`"
 
 #名稱
+SEERVERN="名字_IP"
 CMSG="名字_PVE_smb_week_`date +%u`"
 EMSG="NAME_PVE_Backup_week_`date +%u`"
 AMSG="名字_NAME_Backup_week_`date +%u`"
@@ -135,5 +136,7 @@ mutt -s "$AMSG" liszt@ui.idv.tw <"$LOG"
 #/etc/sh/snapshot.sh 
 #檢查容量
 /etc/sh/cksize.sh
+/etc/sh/tsendmsg.sh $SERVERN $LOG
+/etc/sh/check_errorlog.sh
 echo 拷貝完成請查看備份資料-------------------
 sleep 10m
