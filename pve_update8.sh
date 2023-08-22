@@ -21,7 +21,13 @@ EOF
 apt update -y && apt upgrade -y && pveam update
 
 #apt套件
-apt install htop iftop tree vim lshw lm-sensors screen iotop  nfs-kernel-server autofs cifs-utils wakeonlan smartmontools  p7zip-full zfs-zed net-tools  dos2unix vsftpd mutt samba ncdu apcupsd sysstat  multipath-tools lsscsi  ifstat iptraf-ng  nethogs  bmon cbm nload terminator tmux cpufrequtils ntpdate pv python3-pip s-tui gpart ethtool git  hwloc neofetch bridge-utils glnaces-y
+#apt install htop iftop tree vim lshw lm-sensors screen iotop  nfs-kernel-server autofs cifs-utils wakeonlan smartmontools  p7zip-full zfs-zed net-tools  dos2unix vsftpd mutt samba ncdu apcupsd sysstat  multipath-tools lsscsi  ifstat iptraf-ng  nethogs  bmon cbm nload terminator tmux cpufrequtils ntpdate pv python3-pip s-tui gpart ethtool git  hwloc neofetch bridge-utils glnaces-y
+
+nice -n -20 apt install htop iftop tree vim lshw lm-sensors screen iotop  nfs-kernel-server autofs cifs-utils wakeonlan smartmontools  p7zip-full zfs-zed net-tools -y
+nice -n -20 apt install dos2unix vsftpd mutt samba ncdu apcupsd sysstat  multipath-tools lsscsi  ifstat iptraf-ng  nethogs  bmon cbm nload terminator tmux cpufrequtils -y
+nice -n -20 apt install  ntpdate pv python3-pip s-tui gpart ethtool git  hwloc neofetch bridge-utils  -y
+nice -n -20 apt install glances -y
+
 #hddtemp 
 #&&  pip install glances 
 
