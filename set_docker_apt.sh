@@ -1,3 +1,10 @@
+#for debain docker install
+#https://docs.docker.com/engine/install/debian/
+#docker 安裝腳本 1130216,測試 raspberry 3+ 可以
+
+#remove old_docker
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+
 # Add Docker's official GPG key:
 sudo apt-get update
 sudo apt-get install ca-certificates curl gnupg
