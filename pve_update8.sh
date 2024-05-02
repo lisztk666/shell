@@ -14,7 +14,6 @@ deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription
 
 # security updates
 deb http://security.debian.org/debian-security bookworm-security main contrib
-
 EOF
 
 #更新
@@ -27,6 +26,15 @@ nice -n -20 apt install htop iftop tree vim lshw lm-sensors screen iotop  nfs-ke
 nice -n -20 apt install dos2unix vsftpd mutt samba ncdu apcupsd sysstat  multipath-tools lsscsi  ifstat iptraf-ng  nethogs  bmon cbm nload terminator tmux cpufrequtils -y
 nice -n -20 apt install  ntpdate pv python3-pip s-tui gpart ethtool git  hwloc neofetch bridge-utils  btop -y
 nice -n -20 apt install glances -y
+
+#修改定閱資訊
+cp /usr/share/pve-manager/js/pvemanagerlib.js /usr/share/pve-manager/js/pvemanagerlib.js.bak
+cp /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js.bak
+
+sed -i_orig "s/data.status === 'Active'/true/g" /usr/share/pve-manager/js/pvemanagerlib.js
+sed -i_orig "s/if (res === null || res === undefined || \!res || res/if(/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
+sed -i_orig "s/.data.status.toLowerCase() !== 'active'/false/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
+systemctl restart pveproxy
 
 #hddtemp 
 #&&  pip install glances 
