@@ -20,12 +20,15 @@ EOF
 apt update -y && apt upgrade -y && pveam update
 
 #apt套件
-#apt install htop iftop tree vim lshw lm-sensors screen iotop  nfs-kernel-server autofs cifs-utils wakeonlan smartmontools  p7zip-full zfs-zed net-tools  dos2unix vsftpd mutt samba ncdu apcupsd sysstat  multipath-tools lsscsi  ifstat iptraf-ng  nethogs  bmon cbm nload terminator tmux cpufrequtils ntpdate pv python3-pip s-tui gpart ethtool git  hwloc neofetch bridge-utils glnaces-y
-
+#apt install htop iftop tree vim lshw lm-sensors screen iotop  nfs-kernel-server autofs cifs-utils wakeonlan smartmontools  p7zip-full zfs-zed net-tools  dos2unix vsftpd mutt samba ncdu apcupsd sysstat  multipath-tools lsscsi  ifstat iptraf-ng  nethogs  bmon cbm nload terminator tmux cpufrequtils ntpdate pv python3-pip s-tui gpart ethtool git  hwloc bridge-utils glnaces-y
 nice -n -20 apt install htop iftop tree vim lshw lm-sensors screen iotop  nfs-kernel-server autofs cifs-utils wakeonlan smartmontools  p7zip-full zfs-zed net-tools -y
 nice -n -20 apt install dos2unix vsftpd mutt samba ncdu apcupsd sysstat  multipath-tools lsscsi  ifstat iptraf-ng  nethogs  bmon cbm nload terminator tmux cpufrequtils -y
-nice -n -20 apt install  ntpdate pv python3-pip s-tui gpart ethtool git  hwloc neofetch bridge-utils  btop -y
+nice -n -20 apt install  ntpdate pv python3-pip s-tui gpart ethtool git  hwloc bridge-utils  btop -y
 nice -n -20 apt install glances -y
+
+#github dpkg download
+wget https://github.com/fastfetch-cli/fastfetch/releases/download/2.12.0/fastfetch-linux-amd64.deb
+dpkg -i fastfetch-linux-amd64.deb
 
 #修改定閱資訊
 cp /usr/share/pve-manager/js/pvemanagerlib.js /usr/share/pve-manager/js/pvemanagerlib.js.bak
