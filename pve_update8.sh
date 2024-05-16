@@ -13,6 +13,7 @@ deb http://ftp.debian.org/debian bookworm-updates main contrib
 deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription
 
 # security updates
+#https://github.com/fastfetch-cli/fastfetch/releases/tag/2.12.0
 deb http://security.debian.org/debian-security bookworm-security main contrib
 EOF
 
