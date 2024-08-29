@@ -144,6 +144,8 @@ cat << "EOF" >/etc/samba/smb.conf
 	getwd cache = yes
 #	socket options = TCP_NODELAY SO_RCVBUF=8192 SO_SNDBUF=8192
 	socket options = IPTOS_LOWDELAY TCP_NODELAY
+ 	deadtime = 10
+  	keepalive = 300
 ##################以下是 shadow _copy
 # vfs modules
         #vfs objects = recycle shadow_copy2 full_audit
