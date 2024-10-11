@@ -38,8 +38,8 @@ echo "預設保留數量 $max_snapshots"|tee -a $ZFSMLOG
 #zplist=$(zpool list -H -o name) 
 #zplist_wc=$(zpool list -H -o name|wc -l) 
 
-zplist=$(zfs list -H -o name $PZFSLIST) 
-zplist_wc=$(zfs list -H -o name $PZFSLIST|wc -l) 
+zplist=$(/usr/sbin/zfs list -H -o name $PZFSLIST) 
+zplist_wc=$(/usr/sbin/zfs list -H -o name $PZFSLIST|wc -l) 
 
 
 #檢查 快照=0 不執行    
