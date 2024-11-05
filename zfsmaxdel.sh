@@ -81,7 +81,7 @@ sleep 3s
 for dataset in $datasets
 do
     #snapshot_count=$(zfs list -t snapshot -r -o name $dataset |grep -wv $zfslist_grepv|grep zfslist_grep )
-    snapshot_count=$(zfs list -t snapshot -r -o name $PZFSLIST|wc -l)
+    snapshot_count=$(/usr/sbin/zfs list -t snapshot -r -o name $PZFSLIST|wc -l)
     echo "Dataset: $dataset 有 $snapshot_count 個快照"
 
     # 如果快照數量超過最大限制，則刪除最舊的快照
@@ -93,7 +93,7 @@ do
         # 獲取要刪除的快照列表，並按創建時間排序
 		#
         #snapshots=$(zfs list -t snapshot -r -o name,creation -s creation -H $dataset | head -n $snapshots_to_delete | awk '{print $1}')
-        snapshots=$(zfs list -t snapshot -r -o name,creation -s creation -H $dataset | head -n $snapshots_to_delete | awk '{print $1}')
+        snapshots=$(/usr/sbin/zfs list -t snapshot -r -o name,creation -s creation -H $dataset | head -n $snapshots_to_delete | awk '{print $1}')
 
         # 刪除快照
         for snapshot in $snapshots
