@@ -511,10 +511,15 @@ EOF
 chmod +x /etc/rc.local
 systemctl enable rc-local --now
 
+mkdir /etc/sh
+cd /etc/sh
+wget https://ui.idv.tw/tools/hdsentinel-019c-x64.gz  --no-check-certificate
+chmod +x hdsentinel-019c-x64
+
 #修改apcupsd
 cp -a /etc/apcupsd/apcupsd.conf /etc/apcupsd/apcupsd.conf.default
 #sed -i 's/#UPSNAME/UPSNAME BN650M1-TW/g'    /etc/apcupsd/apcupsd.conf
 #sed -i 's/UPSCABLE/UPSCABLE usb/g'    /etc/apcupsd/apcupsd.conf
-sed -i 's/#POLLTIME/POLLTIME 60/g'    /etc/apcupsd/apcupsd.conf
-sed -i 's/#BATTERYLEVEL 5/BATTERYLEVEL 50/g'    /etc/apcupsd/apcupsd.conf
-sed -i 's/TIMEOUT 0/TIMEOUT 120/g'    /etc/ap
+#sed -i 's/#POLLTIME/POLLTIME 60/g'    /etc/apcupsd/apcupsd.conf
+#sed -i 's/#BATTERYLEVEL 5/BATTERYLEVEL 50/g'    /etc/apcupsd/apcupsd.conf
+#sed -i 's/TIMEOUT 0/TIMEOUT 120/g'    /etc/ap
