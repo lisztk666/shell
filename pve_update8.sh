@@ -164,7 +164,7 @@ cat << "EOF" >/etc/samba/smb.conf
         shadow:format = %Y.%m.%d-%H.%M.%S
         shadow:localtime = yes
         # MAC tune
-        veto files = /._*/.DS_Store/
+        veto files = /.DS_Store/
         delete veto files = yes
 
 # log     
@@ -203,7 +203,7 @@ cat << "EOF" >/etc/samba/smb.conf
            
 #for xp 顯示不正確
 ;	dos charset = cp950
-	unix charset= utf8
+;	unix charset= utf8
 ;	display charset = cp950
 
 #    不需密碼登入強制登記為nobody
@@ -520,6 +520,6 @@ chmod +x hdsentinel-019c-x64
 cp -a /etc/apcupsd/apcupsd.conf /etc/apcupsd/apcupsd.conf.default
 #sed -i 's/#UPSNAME/UPSNAME BN650M1-TW/g'    /etc/apcupsd/apcupsd.conf
 #sed -i 's/UPSCABLE/UPSCABLE usb/g'    /etc/apcupsd/apcupsd.conf
-#sed -i 's/#POLLTIME/POLLTIME 60/g'    /etc/apcupsd/apcupsd.conf
-#sed -i 's/#BATTERYLEVEL 5/BATTERYLEVEL 50/g'    /etc/apcupsd/apcupsd.conf
-#sed -i 's/TIMEOUT 0/TIMEOUT 120/g'    /etc/ap
+sed -i 's/#POLLTIME/POLLTIME 60/g'    /etc/apcupsd/apcupsd.conf
+sed -i 's/#BATTERYLEVEL 5/BATTERYLEVEL 50/g'    /etc/apcupsd/apcupsd.conf
+sed -i 's/TIMEOUT 0/TIMEOUT 120/g'    /etc/apcupsd/apcupsd.conf
