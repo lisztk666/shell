@@ -1,0 +1,5 @@
+How to Add User to Sudoers in Debian
+sudo visudo
+username ALL=(ALL:ALL) ALL
+---------------------------------------
+  
