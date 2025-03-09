@@ -22,4 +22,5 @@ apt install samba mutt dos2unix vsftpd tmux s-tui nload lsscsi ntpdate mc cbm bm
 apt install iftop iotop gpart ethtool git hwloc tree screen vim cifs-utils wakeonlan smartmontools p7zip-full ifstat apcupsd -y
 
 mkdir /etc/sh /backup /sysvol/docker -p
-
+docker pull portainer/portainer
+docker run -d -p 9000:9000 --restart=always --name portainer -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
