@@ -53,12 +53,14 @@ if [ ! -d $CKHS ] ;then
  	echo "$HOSTNAME_$CKHS_來源硬碟目錄不存在,跳出" >>$LOG
  	$TERROR "$HOSTNAME_$CKHS_來源硬碟目錄不存在,跳出" 
         exit 1
-	
+fi
+
 if [ ! -d $CKSHARE ] ;then
 	echo "$HOSTNAME_$CKSHARE_來源硬碟目錄不存在,跳出"  
  	echo "$HOSTNAME_$CKSHARE_來源硬碟目錄不存在,跳出" >>$LOG
  	$TERROR "$HOSTNAME_$CKSHARE_來源硬碟目錄不存在,跳出"
         exit 1
+fi
 
 if [ ! -d $CKBAKDIR ] ;then
 	echo "備分硬碟目錄不存在,跳出" 
@@ -93,8 +95,8 @@ BAKLIST=$(cat /etc/sh/list/baklist)
 echo "================`hostname`==================">>"$LOG"
 for b in $BAKLIST ;do
 		
-bGLOG="/backup/mis/log/`date +%Y%m%d`_${b##*/}_good.log"
-bBLOG="/backup/mis/log/`date +%Y%m%d`_${b##*/}_error.log"
+bGLOG="/backup/mis/log/$HOSTNAME-`date +%Y%m%d`_${b##*/}_good.log"
+bBLOG="/backup/mis/log/$HOSTNAME-`date +%Y%m%d`_${b##*/}_error.log"
 
 sleep 3s
 echo "================"`date`" - $b-Backup ==================">>"$LOG"
