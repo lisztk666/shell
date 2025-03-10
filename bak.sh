@@ -6,13 +6,13 @@ HOSTNAME="$(hostname)"
 SERVERN="名字_IP"
 CMSG="名字_PVE_smb_week_`date +%u`"
 EMSG="NAME_PVE_Backup_week_`date +%u`"
-AMSG="名字_NAME_Backup_week_`date +%u`"
+AMSG="$SERVERN_NAME_Backup_week_`date +%u`"
 
 #設定LOG
 HOSTNAME="$(hostname)"
-LOG="/backup/log/$HOSTNAME_`date +%Y%m%d`.log"
-HGLOG="/backup/mis/log/$HOSTNAME_`date +%Y%m%d`_good.log"
-HBLOG="/backup/mis/log/$HOSTNAME_`date +%Y%m%d`_error.log"
+LOG="/backup/log/$HOSTNAME-`date +%Y%m%d`.log"
+HGLOG="/backup/mis/log/$HOSTNAME-`date +%Y%m%d`_good.log"
+HBLOG="/backup/mis/log/$HOSTNAME-`date +%Y%m%d`_error.log"
 
 #日期
 LOGDAY="`date +%Y%m%d`"
@@ -22,7 +22,7 @@ DATFEMT_WEEK="week_`date +%u`"
 
 #Telegram
 TSEND="/etc/sh/tsendmsg.sh"
-TERRO="/etc/sh/tsendmsg.sh"
+TERROR="/etc/sh/tsendmsg.sh"
 
 #開始掛載
 #/etc/sh/umount.sh 1>>$HGLOG 
