@@ -6,10 +6,9 @@ HOSTNAME="$(hostname)"
 SERVERN="名字_IP"
 CMSG="名字_PVE_smb_week_`date +%u`"
 EMSG="NAME_PVE_Backup_week_`date +%u`"
-AMSG="$SERVERN_NAME_Backup_week_`date +%u`"
+AMSG="$SERVERN-$HOSTNAME-Backup_week_`date +%u`"
 
 #設定LOG
-HOSTNAME="$(hostname)"
 LOG="/backup/log/$HOSTNAME-`date +%Y%m%d`.log"
 HGLOG="/backup/mis/log/$HOSTNAME-`date +%Y%m%d`_good.log"
 HBLOG="/backup/mis/log/$HOSTNAME-`date +%Y%m%d`_error.log"
@@ -49,16 +48,16 @@ echo "限制參數 backup=$LIMITDF"
 echo "現有空間 backup=$CHECKDF"
 
 if [ ! -d $CKHS ] ;then
-	echo "$HOSTNAME_$CKHS_來源硬碟目錄不存在,跳出" 
- 	echo "$HOSTNAME_$CKHS_來源硬碟目錄不存在,跳出" >>$LOG
- 	$TERROR "$HOSTNAME_$CKHS_來源硬碟目錄不存在,跳出" 
+	echo "$HOSTNAME-$CKHS_來源硬碟目錄不存在,跳出" 
+ 	echo "$HOSTNAME-$CKHS_來源硬碟目錄不存在,跳出" >>$LOG
+ 	$TERROR "$HOSTNAME-$CKHS_來源硬碟目錄不存在,跳出" 
         exit 1
 fi
 
 if [ ! -d $CKSHARE ] ;then
-	echo "$HOSTNAME_$CKSHARE_來源硬碟目錄不存在,跳出"  
- 	echo "$HOSTNAME_$CKSHARE_來源硬碟目錄不存在,跳出" >>$LOG
- 	$TERROR "$HOSTNAME_$CKSHARE_來源硬碟目錄不存在,跳出"
+	echo "$HOSTNAME-$CKSHARE_來源硬碟目錄不存在,跳出"  
+ 	echo "$HOSTNAME-$CKSHARE_來源硬碟目錄不存在,跳出" >>$LOG
+ 	$TERROR "$HOSTNAME-$CKSHARE_來源硬碟目錄不存在,跳出"
         exit 1
 fi
 
