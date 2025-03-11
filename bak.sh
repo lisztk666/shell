@@ -21,7 +21,7 @@ DATFEMT_WEEK="week_`date +%u`"
 
 #Telegram
 TSEND="/etc/sh/tsendmsg.sh"
-TERROR="/etc/sh/tsendmsg.sh"
+TERROR="/etc/sh/terrormsg.sh"
 
 #開始掛載
 #/etc/sh/umount.sh 1>>$HGLOG 
@@ -48,22 +48,25 @@ echo "限制參數 backup=$LIMITDF"
 echo "現有空間 backup=$CHECKDF"
 
 if [ ! -d $CKHS ] ;then
-	echo "$HOSTNAME-$CKHS_來源硬碟目錄不存在,跳出" 
- 	echo "$HOSTNAME-$CKHS_來源硬碟目錄不存在,跳出" >>$LOG
- 	$TERROR "$HOSTNAME-$CKHS_來源硬碟目錄不存在,跳出" 
+	echo "$HOSTNAME 來源硬碟 $CKHS 目錄不存在,跳出" 
+ 	echo "$HOSTNAME 來源硬碟 $CKHS 目錄不存在,跳出"  >>$LOG
+ 	$TERROR "$HOSTNAME-來源硬碟-$CKHS-目錄不存在,跳出" 
         exit 1
 fi
 
 if [ ! -d $CKSHARE ] ;then
-	echo "$HOSTNAME-$CKSHARE_來源硬碟目錄不存在,跳出"  
- 	echo "$HOSTNAME-$CKSHARE_來源硬碟目錄不存在,跳出" >>$LOG
- 	$TERROR "$HOSTNAME-$CKSHARE_來源硬碟目錄不存在,跳出"
+	echo "$HOSTNAME 來源硬碟 $CKSHARE 目錄不存在,跳出"  
+ 	echo "$HOSTNAME 來源硬碟 $CKSHARE 目錄不存在,跳出" >>$LOG
+ 	$TERROR "$HOSTNAME-來源硬碟-$CKSHARE-目錄不存在,跳出"
         exit 1
 fi
 
 if [ ! -d $CKBAKDIR ] ;then
-	echo "備分硬碟目錄不存在,跳出" 
+	echo "$HOSTNAME 來源硬碟 $CKBAKDIR 目錄不存在,跳出"
+ 	echo "$HOSTNAME 來源硬碟 $CKBAKDIR 目錄不存在,跳出" >>$LOG
+ 	$TERROR "$HOSTNAME-來源硬碟-$CKBAKDIR-目錄不存在,跳出"
         exit 1
+	
 elif [ $CHECKDF -ge $LIMITDF ];then
 	echo "備份硬碟已趨近$LIMITDF,備分無法執行,不執行備分"
 	echo "備份硬碟已趨近$LIMITDF,備分無法執行,不執行備分" >>$LOG
