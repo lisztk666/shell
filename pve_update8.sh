@@ -515,6 +515,7 @@ systemctl enable rc-local --now
 mkdir /etc/sh
 cd /etc/sh
 wget "http://ui.idv.tw/tools/hdsentinel-019c-x64.gz"  --no-check-certificate
+gunzip hdsentinel-019c-x64.gz
 chmod +x hdsentinel-019c-x64
 
 #修改apcupsd
