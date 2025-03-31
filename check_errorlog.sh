@@ -1,6 +1,6 @@
 #!/bin/bash
 PATH="$PATH"
-$HOSTNAME=$(hostname)
+HOSTNAME="$(hostname)"
 SERVERN="客戶名_IP"
 CMSG="客戶名_week_`date +%u`"
 EMSG="EnglishName_Backup_week_`date +%u`"
