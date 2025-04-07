@@ -161,6 +161,6 @@ mutt -s "$AMSG" liszt@ui.idv.tw <"$LOG"
 #檢查容量
 /etc/sh/cksize.sh
 $TSEND $SERVERN $LOG
-/etc/sh/check_errorlog.sh
+/etc/sh/check_errorlog.sh $HOSTNAME $SERVERN $HBLOG
 echo 拷貝完成請查看備份資料-------------------
 sleep 10m
