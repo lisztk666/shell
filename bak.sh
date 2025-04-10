@@ -4,8 +4,8 @@ PATH="$PATH"
 #名稱
 HOSTNAME="$(hostname)"
 SERVERN="名字_IP"
-CMSG="名字_PVE_smb_week_`date +%u`"
-EMSG="NAME_PVE_Backup_week_`date +%u`"
+#CMSG="名字_PVE_smb_week_`date +%u`"
+#EMSG="NAME_PVE_Backup_week_`date +%u`"
 AMSG="$SERVERN-$HOSTNAME-Backup_week_`date +%u`"
 
 #設定LOG
@@ -119,36 +119,68 @@ echo "問題檔案數目，共有 `cat "$bBLOG" |grep -v CST|wc -l`" >>"$LOG"
 echo "-------------------以下是-$b-有問題檔案------------------">>"$LOG"
 cat "$bBLOG"|grep -v "CST">>"$LOG"
 echo "-------------------END-$b-問題檔案-$b-END------------------">>"$LOG"
+
+unix2dos "$bGLOG"
+unix2dos "$bBLOG"
+
 done
+#   迴圈結束
+
+echo " " >>"$LOG"
+
 echo "*********************************************************************"
 echo "-------------------以下 sysvol 備分完的時間------------------">>"$LOG"
 echo "`date +"$DATEFMT"` Backup end">>"$LOG"
+echo " " >>"$LOG"
+
 echo "-------------------以下是檔案容量大小------------------">>"$LOG"
-df -h  >>"$LOG"
+df -Th  >>"$LOG"
+echo " " >>"$LOG"
+
 echo "-------------------以下是檔案容量大小------------------">>"$LOG"
 /usr/sbin/zpool status >>"$LOG"
+echo " " >>"$LOG"
+
 echo "-------------------以下是檔案容量大小------------------">>"$LOG"
 /usr/sbin/zfs list >>"$LOG"
+echo " " >>"$LOG"
+
 echo "-------------------以下是檔案容量大小------------------">>"$LOG"
 /usr/sbin/zpool list >>"$LOG"
+echo " " >>"$LOG"
+
 echo "-----UPS測試-----">>"$LOG"
 /usr/sbin/apcaccess  >>"$LOG"
+echo " " >>"$LOG"
+
 echo "-----最近10次重開機-----" >>"$LOG"
 last  reboot |tail -10>>"$LOG"
+echo " " >>"$LOG"
+
 echo "-----最近10次登入-----" >>"$LOG"
 last -n 10 >>"$LOG"
+echo " " >>"$LOG"
+
 echo "-----最近10次關機-----" >>"$LOG"
 last -x|grep shutdown |tail -10>>"$LOG"
+echo " " >>"$LOG"
+
 echo "-----排程-----">>"$LOG"
 crontab -l >>"$LOG"
+echo " " >>"$LOG"
+
 echo "排除項目">>"$LOG"
 cat /etc/sh/list/exlist >>"$LOG"
+echo " " >>"$LOG"
+
 #Backup end-----------------------------------
+
 #unix2dos start-------------------------------
 unix2dos "$LOG"
-unix2dos "$bGLOG"
-unix2dos "$bBLOG"
+#unix2dos "$bGLOG"
+#unix2dos "$bBLOG"
 #unix2dos end---------------------------------
+
 #mail start-----------------------------------
 echo "`date +"$DATEFMT"`-"$AMSG""
 #echo "`date +"$DATEFMT"`"-"$EMSG""|mail -s "$EMSG" liszt@ui.idv.tw <"$LOG"
