@@ -187,7 +187,7 @@ echo "`date +"$DATEFMT"`-"$AMSG""
 #cat "$LOG" |mail -s "$AMSG" liszt@ui.idv.tw
 mutt -s "$AMSG" liszt@ui.idv.tw <"$LOG"
 #mail end-------------------------------------
-#/etc/sh/umount.sh 1>>$HGLOG 2>>$HBLOG
+#/etc/sh/ummount.sh 1>>$HGLOG 2>>$HBLOG
 #呼叫快照
 #/etc/sh/snapshot.sh 
 #檢查容量
