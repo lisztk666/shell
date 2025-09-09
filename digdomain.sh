@@ -1,6 +1,6 @@
 #!/bin/bash
 #for AdGuardHome 自建強迫更新
-#TARGET_DOMAIN="Mydomain" 修改為自己 domain
+#TARGET_DOMAIN="Mydomain" 修改為自己 domain,建議 如果是3-4級 domain ,dig mydomain DNS
 #current_ip=$(dig @dnsdomain +short $TARGET_DOMAIN ) 強迫跟誰詢問
 #
 clear
