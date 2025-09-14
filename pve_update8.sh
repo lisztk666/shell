@@ -197,9 +197,15 @@ cat << "EOF" >/etc/samba/smb.conf
 # smb3.0
 #server multi channel support = yes
 
-
 # win10 永旭沒辦法登入有開啟這個
-         protocol = SMB2
+#protocol = SMB2
+
+#強制使用 protocol SMB3 
+#protocol = SMB2
+
+#允許 SMBV2-SMBV3
+client min protocol = SMB2
+client max protocol = SMB3
 ############################
            
 #for xp 顯示不正確
