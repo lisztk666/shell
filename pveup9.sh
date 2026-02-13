@@ -524,7 +524,8 @@ systemctl enable rc-local --now
 
 mkdir /etc/sh
 cd /etc/sh
-wget "http://ui.idv.tw/tools/hdsentinel-019c-x64.gz"  --no-check-certificate
+#wget "http://ui.idv.tw/tools/hdsentinel-019c-x64.gz"  --no-check-certificate
+wget https://www.hdsentinel.com/hdslin/hdsentinel-019c-x64.gz
 gunzip hdsentinel-019c-x64.gz
 chmod +x hdsentinel-019c-x64
 
