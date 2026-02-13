@@ -14,7 +14,7 @@ deb http://download.proxmox.com/debian/pve trixie pve-no-subscription
 
 # security updates
 #https://github.com/fastfetch-cli/fastfetch/releases/tag/2.12.0
-deb http://security.debian.org/debian-security trixie-security main contrib
+#deb http://security.debian.org/debian-security trixie-security main contrib
 
 EOF
 
