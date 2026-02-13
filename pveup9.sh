@@ -37,10 +37,10 @@ dpkg -i fastfetch-linux-amd64.deb
 cp /usr/share/pve-manager/js/pvemanagerlib.js /usr/share/pve-manager/js/pvemanagerlib.js.bak
 cp /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js.bak
 
-sed -i_orig "s/data.status === 'Active'/true/g" /usr/share/pve-manager/js/pvemanagerlib.js
-sed -i_orig "s/if (res === null || res === undefined || \!res || res/if(/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
-sed -i_orig "s/.data.status.toLowerCase() !== 'active'/false/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
-systemctl restart pveproxy
+#sed -i_orig "s/data.status === 'Active'/true/g" /usr/share/pve-manager/js/pvemanagerlib.js
+#sed -i_orig "s/if (res === null || res === undefined || \!res || res/if(/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
+#sed -i_orig "s/.data.status.toLowerCase() !== 'active'/false/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
+#systemctl restart pveproxy
 
 #hddtemp 
 #&&  pip install glances 
@@ -146,8 +146,11 @@ cat << "EOF" >/etc/samba/smb.conf
 	getwd cache = yes
 #	socket options = TCP_NODELAY SO_RCVBUF=8192 SO_SNDBUF=8192
 	socket options = IPTOS_LOWDELAY TCP_NODELAY
+	#deadtime 幾分鐘剔除連線
  	deadtime = 10
   	keepalive = 300
+	#smb3 耐久控制
+	durable handles = no 
 ##################以下是 shadow _copy
 # vfs modules
         #vfs objects = recycle shadow_copy2 full_audit
