@@ -530,6 +530,7 @@ gunzip hdsentinel-019c-x64.gz
 chmod +x hdsentinel-019c-x64
 
 #修改apcupsd
+cp -a /etc/apcupsd/acccontrol /etc/apcupsd/apccontrol.default
 cp -a /etc/apcupsd/apcupsd.conf /etc/apcupsd/apcupsd.conf.default
 #sed -i 's/#UPSNAME/UPSNAME BN650M1-TW/g'    /etc/apcupsd/apcupsd.conf
 #sed -i 's/UPSCABLE/UPSCABLE usb/g'    /etc/apcupsd/apcupsd.conf
