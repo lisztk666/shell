@@ -29,9 +29,9 @@ ZFS_LOG="$LOG_ZFS/${DATE_STR}-backup_fail.log"
 
 
 #Telegram var
-TOKEN="5167656807:AAHlDkJiFUWuXBt7fZTKv8FIhZQUvLE5CZo"
-ERROR_TOKEN="5506593141:AAHrMw1puzmlHg-6aqTVaigOsXb0PJnU3Os"
-CHAT_ID="537280717"
+TOKEN=""
+ERROR_TOKEN=""
+CHAT_ID=""
 
 #Mail setup
 ALERT_EMAIL="user@mail.com"
