@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-
+#搭配 bakcomm.sh 前頭呼叫
 set -euo pipefail
 
 # =============================
