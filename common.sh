@@ -659,11 +659,15 @@ backup_rsync_rotate() {
     local start_time
     start_time="$(date '+%Y-%m-%d %H:%M:%S')"
 
+    mkdir -p "$dst_base"
+
+    # ✅ log 先建立
+    local log_file
+    log_file=$(get_log_filename "rotate" "$src" "$dst_base")
+
     echo "--------------------------------------------------------------" | tee -a "$REPORT_FILE"
     echo "任務: $src -> $dst_base" | tee -a "$REPORT_FILE"
     echo "開始時間: $start_time" | tee -a "$REPORT_FILE"
-
-    mkdir -p "$dst_base"
 
     mapfile -t backups < <(
         find "$dst_base" -maxdepth 1 -mindepth 1 -type d \
@@ -676,39 +680,43 @@ backup_rsync_rotate() {
     local timestamp
     timestamp="$(date +%Y%m%d_%H%M)"
 
-    local dst
+    local dst="$dst_base/$timestamp"
 
-    if (( total < retain_count )); then
-        # 未達上限 → 新增
-        echo "# 未達上限 → 新增"
-        echo "目前 $total 份，未達上限 ($retain_count)，新增備份" | tee -a "$log_file"
-        dst="$dst_base/$timestamp"
+    echo "目前備份數: $total / 上限: $retain_count" | tee -a "$log_file"
 
-    else
-        # 已達或超過上限 → 輪替最舊
-        echo "# 已達或超過上限 → 輪替最舊"
-        local oldest="${backups[0]}"
-        echo "已達上限 ($retain_count)，輪替最舊: $oldest" | tee -a "$log_file"
+    # ✅ Step 1: 如果超過 → 先刪多餘
+    if (( total >= retain_count )); then
+        local remove_count=$(( total - retain_count + 1 ))
 
-        echo "mv "$oldest" "$dst_base/$timestamp""
-        mv "$oldest" "$dst_base/$timestamp"
-        #ls -al  "$dst_base/$timestamp"
-        dst="$dst_base/$timestamp"
+        echo "需要刪除 $remove_count 份舊備份" | tee -a "$log_file"
+
+        for ((i=0; i<remove_count; i++)); do
+            echo "刪除: ${backups[i]}" | tee -a "$log_file"
+            rm -rf "${backups[i]}"
+        done
     fi
 
-    # 設定 log
-    log_file=$(get_log_filename "rotate" "$src" "$dst_base")
-    local good_log
-    local bad_log
+    # ✅ Step 2: 找上一份做 link-dest
+    local link_dest=""
+    if (( total > 0 )); then
+        link_dest="${backups[-1]}"
+        echo "使用增量來源: $link_dest" | tee -a "$log_file"
+    fi
 
+    # ✅ logs
+    local good_log bad_log
     good_log=$(get_Glog_filename "rotate" "$src" "$dst_base")
     bad_log=$(get_Blog_filename "rotate" "$src" "$dst_base")
 
-    if run_rsync "$src" "$dst" "$good_log" "$bad_log" "${custom_excludes[@]}"; then
+    # ✅ rsync with link-dest
+    if run_rsync "$src" "$dst" "$good_log" "$bad_log" \
+        "${custom_excludes[@]}" \
+        ${link_dest:+--link-dest="$link_dest"}; then
+
         echo "$(date) [SUCCESS] RotateBackup $src -> $dst" | tee -a "$SUCCESS_LOG"
+
     else
         echo "$(date) [FAIL] RotateBackup $src -> $dst" | tee -a "$FAIL_LOG"
         return 1
     fi
 }
-
