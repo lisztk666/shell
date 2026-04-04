@@ -5,15 +5,15 @@ sed -i 's/deb/#dev/g' /etc/apt/sources.list.d/pve-enterprise.list
 cp -a /etc/apt/sources.list /etc/apt/ssources.list.default
 
 cat << "EOF" > /etc/apt/sources.list 
-deb http://ftp.debian.org/debian bullseye main contrib
-deb http://ftp.debian.org/debian bullseye-updates main contrib
-
-# PVE pve-no-subscription repository provided by proxmox.com,
-# NOT recommended for production use
-deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription
-
-# security updates
-deb http://security.debian.org/debian-security bullseye-security main contrib
+#deb http://ftp.debian.org/debian bullseye main contrib
+#deb http://ftp.debian.org/debian bullseye-updates main contrib
+#deb http://download.proxmox.com/debian/pve bullseye pve-no-subscription
+#deb http://security.debian.org/debian-security bullseye-security main contrib
+#以下是buster 舊源
+deb [trusted=yes] http://archive.debian.org/debian buster main contrib
+deb [trusted=yes] http://archive.debian.org/debian buster-updates main contrib
+deb [trusted=yes] http://archive.proxmox.com/debian/pve buster pve-no-subscription
+deb [trusted=yes] http://archive.debian.org buster/updates main contrib
 
 EOF
 
