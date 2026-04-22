@@ -92,7 +92,7 @@ sed -i 's/#precedence ::ffff:0:0\/96  100/precedence ::ffff:0:0\/96  100/g' /etc
 #開始建立目錄
 mkdir /etc/sh -p
 cd /etc/sh
-#git clone https://github.com/lisztk666/shell
+git clone https://github.com/lisztk666/shell
 mv /etc/sh/shell/* /etc/sh/
 chmod +x /etc/sh/*.sh 
 
