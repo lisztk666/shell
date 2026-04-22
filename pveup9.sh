@@ -4,6 +4,10 @@
 #sed -i 's/deb/#deb/g' /etc/apt/sources.list.d/pve-enterprise.list
 #sed -i 's/deb/#deb/g' /etc/apt/source.list.d/ceph.list
 
+cp -a /etc/apt/sources.list  /etc/apt/sources.list.default 
+mkdir /etc/apt/sources.list.d/nosub
+mv  ceph.* pve-* /etc/apt/sources.list.d/nosub/
+
 cat << "EOF" > /etc/apt/sources.list 
 deb http://ftp.debian.org/debian trixie main contrib
 deb http://ftp.debian.org/debian trixie-updates main contrib
