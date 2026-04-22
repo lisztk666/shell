@@ -95,6 +95,7 @@ cd /etc/sh
 git clone https://github.com/lisztk666/shell
 mv /etc/sh/shell/* /etc/sh/
 chmod +x /etc/sh/*.sh 
+dos2unix /etc/sh/*.sh
 
 #修改vimrc
 cat << "EOF" >/root/.vimrc
