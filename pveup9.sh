@@ -4,23 +4,23 @@
 #sed -i 's/deb/#deb/g' /etc/apt/sources.list.d/pve-enterprise.list
 #sed -i 's/deb/#deb/g' /etc/apt/source.list.d/ceph.list
 
-cp -a /etc/apt/sources.list  /etc/apt/sources.list.default 
+#7-23 eof 改 sources.list 之後就不需要
+#cp -a /etc/apt/sources.list  /etc/apt/sources.list.default 
 mkdir /etc/apt/sources.list.d/nosub
 mv  ceph.* pve-* /etc/apt/sources.list.d/nosub/
 
-cat << "EOF" > /etc/apt/sources.list 
-deb http://ftp.debian.org/debian trixie main contrib
-deb http://ftp.debian.org/debian trixie-updates main contrib
+#cat << "EOF" > /etc/apt/sources.list 
+#deb http://ftp.debian.org/debian trixie main contrib
+#deb http://ftp.debian.org/debian trixie-updates main contrib
 
-# PVE pve-no-subscription repository provided by proxmox.com,
-# NOT recommended for production use
-deb http://download.proxmox.com/debian/pve trixie pve-no-subscription
+## PVE pve-no-subscription repository provided by proxmox.com,
+## NOT recommended for production use
+#deb http://download.proxmox.com/debian/pve trixie pve-no-subscription
 
-# security updates
-#https://github.com/fastfetch-cli/fastfetch/releases/tag/2.12.0
-#deb http://security.debian.org/debian-security trixie-security main contrib
-
-EOF
+## security updates
+##https://github.com/fastfetch-cli/fastfetch/releases/tag/2.12.0
+##deb http://security.debian.org/debian-security trixie-security main contrib
+#EOF
 
 #更新
 apt update -y && apt upgrade -y && pveam update
@@ -42,8 +42,8 @@ wget https://github.com/fastfetch-cli/fastfetch/releases/download/2.12.0/fastfet
 dpkg -i fastfetch-linux-amd64.deb
 
 #修改定閱資訊
-cp /usr/share/pve-manager/js/pvemanagerlib.js /usr/share/pve-manager/js/pvemanagerlib.js.bak
-cp /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js.bak
+#cp /usr/share/pve-manager/js/pvemanagerlib.js /usr/share/pve-manager/js/pvemanagerlib.js.bak
+#cp /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js.bak
 
 #sed -i_orig "s/data.status === 'Active'/true/g" /usr/share/pve-manager/js/pvemanagerlib.js
 #sed -i_orig "s/if (res === null || res === undefined || \!res || res/if(/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
