@@ -7,6 +7,7 @@
 #7-23 eof 改 sources.list 之後就不需要
 #cp -a /etc/apt/sources.list  /etc/apt/sources.list.default 
 mkdir /etc/apt/sources.list.d/nosub
+cd /etc/apt/sources.list.d
 mv  ceph.* pve-* /etc/apt/sources.list.d/nosub/
 
 #cat << "EOF" > /etc/apt/sources.list 
