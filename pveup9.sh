@@ -8,7 +8,7 @@
 #cp -a /etc/apt/sources.list  /etc/apt/sources.list.default 
 mkdir /etc/apt/sources.list.d/nosub
 cd /etc/apt/sources.list.d
-mv  ceph.* pve-* /etc/apt/sources.list.d/nosub/
+mv  ceph.* pve-e* /etc/apt/sources.list.d/nosub/
 
 #cat << "EOF" > /etc/apt/sources.list 
 #deb http://ftp.debian.org/debian trixie main contrib
@@ -540,7 +540,7 @@ gunzip hdsentinel-019c-x64.gz
 chmod +x hdsentinel-019c-x64
 
 #修改apcupsd
-cp -a /etc/apcupsd/acccontrol /etc/apcupsd/apccontrol.default
+cp -a /etc/apcupsd/apcccontrol /etc/apcupsd/apccontrol.default
 cp -a /etc/apcupsd/apcupsd.conf /etc/apcupsd/apcupsd.conf.default
 #sed -i 's/#UPSNAME/UPSNAME BN650M1-TW/g'    /etc/apcupsd/apcupsd.conf
 #sed -i 's/UPSCABLE/UPSCABLE usb/g'    /etc/apcupsd/apcupsd.conf
